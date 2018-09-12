@@ -1,9 +1,9 @@
-// Project Title
-// Your Name
-// Date
+// Interactive Scene
+// Dylan Yelich
+// Sept 12
 //
 // Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// -Not Expert Yet
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
