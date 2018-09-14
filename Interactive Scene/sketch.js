@@ -6,7 +6,7 @@
 // -Not Expert Yet
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(windowWidth, windowHeight);
   background(255);
   strokeWeight(4);
 }
@@ -56,7 +56,10 @@ function keyTyped() {
       stroke(135, 135, 135);
     }
 		if (key === 'a') {
-
+      strokeWeight(strokeWeight - 2)
 		}
+    if (key === 's') {
+      strokeWeight(strokeWeight + 2)
+    }
   }
 }
