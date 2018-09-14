@@ -56,10 +56,16 @@ function keyTyped() {
       stroke(135, 135, 135);
     }
 		if (key === 'a') {
-      strokeWeight(strokeWeight - 2)
+      strokeWeight(2)
 		}
     if (key === 's') {
-      strokeWeight(strokeWeight + 2)
+      strokeWeight(3)
+    }
+    if (key === 'd') {
+      strokeWeight(5)
+    }
+    if (key === 'f') {
+      strokeWeight(7)
     }
   }
 }
