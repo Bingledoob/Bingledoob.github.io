@@ -5,6 +5,7 @@
 //CONTROLS: 1 = Black, 2 = White, 3 = Red, 4 = Green, 5 = Blue, 6 = Brown, 7 = Purple, 8 = Yellow, 9 = Pink, 0 = Grey
 //CONTROLS: A = Pen size Small, S = Pen Size Average, D = Pen Size Large, F = Pen Size Thick
 //CONTROLS: W = Resets Drawing and Changes background to White, B = Resets Drawing and Change background to Black
+//CONTROLS: T = Save and Download Drawn Picture to your Computer (Virus Free!)
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -67,6 +68,9 @@ function keyTyped() {
     }
     if (key === 'f') {
       strokeWeight(7)
+    }
+    if (key === 't') {
+      saveCanvas('png');
     }
   }
 }
