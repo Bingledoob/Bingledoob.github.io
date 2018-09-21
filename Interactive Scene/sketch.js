@@ -6,7 +6,6 @@
 //CONTROLS: A = Pen size Small, S = Pen Size Average, D = Pen Size Large, F = Pen Size Thick
 //CONTROLS: W = Resets Drawing and Changes background to White, B = Resets Drawing and Change background to Black
 //CONTROLS: G = Save and Download Drawn Picture to your Computer (Virus Free!)
-//CONTROLS: Q = Thumb Sticker,
 
 function preload() {
   thumbs = loadImage("assets/Thumb.png");
@@ -76,9 +75,6 @@ function keyTyped() {
     }
     if (key === 'g') {
       saveCanvas('png');
-    }
-    if (key === 'q') {
-      
     }
   }
 }
