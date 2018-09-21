@@ -6,10 +6,7 @@
 //CONTROLS: A = Pen size Small, S = Pen Size Average, D = Pen Size Large, F = Pen Size Thick
 //CONTROLS: W = Resets Drawing and Changes background to White, B = Resets Drawing and Change background to Black
 //CONTROLS: G = Save and Download Drawn Picture to your Computer (Virus Free!)
-
-function preload() {
-  thumbs = loadImage("assets/Thumb.png");
-}
+//CONTROLS: Z = Draw a Triangl,e X = Draw a Square, C = Draw a Circle, V = Draw a Rectangle
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -75,6 +72,18 @@ function keyTyped() {
     }
     if (key === 'g') {
       saveCanvas('png');
+    }
+    if (key === 'z') {
+      triangle(mouseX - 120, mouseY + 60, mouseX, mouseY - 120, mouseX + 120, mouseY + 60)
+    }
+    if (key === 'x') {
+      rect(mouseX - 100, mouseY - 100, 200, 200)
+    }
+    if (key === 'c') {
+      ellipse(mouseX, mouseY, 200, 200)
+    }
+    if (key === 'v') {
+      rect(mouseX - 100, mouseY - 50, 200, 100)
     }
   }
 }
