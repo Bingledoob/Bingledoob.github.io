@@ -6,7 +6,7 @@
 //CONTROLS: A = Pen size Small, S = Pen Size Average, D = Pen Size Large, F = Pen Size Thick
 //CONTROLS: W = Resets Drawing and Changes background to White, B = Resets Drawing and Change background to Black
 //CONTROLS: G = Save and Download Drawn Picture to your Computer (Virus Free!)
-//CONTROLS: Z = Draw a Triangl,e X = Draw a Square, C = Draw a Circle, V = Draw a Rectangle
+//CONTROLS: Z = Draw a Triangle, X = Draw a Square, C = Draw a Circle, V = Draw a Rectangle
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
