@@ -13,6 +13,7 @@ let state;
 
 
 function preload() {
+  state = 1
   door = loadImage("assets/Door.png");
   houseWindow = loadImage("assets/Window.png");
   goblinDoor1 = loadImage("assets/Goblin 1D.png");
@@ -27,5 +28,11 @@ function setup() {
 }
 
 function draw() {
+  checkState();
+}
 
+function checkState() {
+  if (state === 1) {
+    house(0, 0);
+  }
 }
