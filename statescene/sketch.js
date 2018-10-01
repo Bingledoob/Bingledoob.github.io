@@ -4,16 +4,20 @@
 //
 // Make Frend With Gobbo
 
+let state;
+let lastStateChange;
+
+//images
 let door;
 let houseWindow;
 let goblinDoor1;
 let goblinDoor2;
 let house;
-let state;
+
 
 
 function preload() {
-  state = 1
+  state = 1;
   door = loadImage("assets/Door.png");
   houseWindow = loadImage("assets/Window.png");
   goblinDoor1 = loadImage("assets/Goblin 1D.png");
@@ -24,15 +28,23 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  background(255);
 }
 
 function draw() {
+  background(255);
   checkState();
 }
 
 function checkState() {
+  let elapsedTime = millis() - lastStateChange;
   if (state === 1) {
-    house(0, 0);
+    image(house, 0, 0);
+    image(door, 50, 90);
+  }
+}
+
+function clickDoor() {
+  if (mouseIsPressed() && mouseX >= 50 && mouseX <= 90 && mouseY >= 90 && mouseY <= 50) {
+    state = 2;
   }
 }
