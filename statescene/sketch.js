@@ -5,27 +5,52 @@
 // Make Frend With Gobbo
 
 let state;
+let gobStateDuration = 2000;
 let lastStateChange;
 
-//images
-let door;
-let houseWindow;
-let goblinDoor1;
-let goblinDoor2;
+//holy bagoli look at all these image variables
 let house;
+let goblin1;
+let goblin2;
+let goblin3;
+let leavingButton;
+let stayingButton;
 
+let goblinLeave;
+//wowie theres more
+let goblinPolice1;
+let goblinPolice2;
+let ending1;
+let ending2;
+let ending3;
+let ending4;
+let ending5;
+let ending6;
+let ending7;
 
-
-function preload() {
+function preload() { //oh wow these image variables are turning into images
   state = 1;
-  door = loadImage("assets/Door.png");
-  houseWindow = loadImage("assets/Window.png");
-  goblinDoor1 = loadImage("assets/Goblin 1D.png");
-  goblinDoor2 = loadImage("assets/Goblin 2D.png");
+  lastStateChange = 0;
   house = loadImage("assets/House Background.png");
+  goblin1 = loadImage("assets/Goblin 1D.png");
+  goblin2 = loadImage("assets/Goblin 2D.png");
+  goblin3 = loadImage("assets/Goblin 3D.png");
+  leavingButton = loadImage("assets/Leaving Button.png");
+  stayingButton = loadImage("assets/Staying Button.png");
 
+  goblinLeave = loadImage("assets/Leaving.png");
+
+  goblinPolice1 = loadImage("assets/Goblin 1Y.png");
+  goblinPolice2 = loadImage("assets/Goblin 2Y.png");
+  ending1 = loadImage("assets/Ending 1.png");
+  ending2 = loadImage("assets/Ending 2.png");
+  ending3 = loadImage("assets/Ending 3.png");
+  ending4 = loadImage("assets/Ending 4.png");
+  ending5 = loadImage("assets/Ending 5.png");
+  ending6 = loadImage("assets/Ending 6.png");
+  ending7 = loadImage("assets/Ending 7.png");
 }
-
+//phew we're away from the images
 function setup() {
   createCanvas(windowWidth, windowHeight);
 }
@@ -34,17 +59,123 @@ function draw() {
   background(255);
   checkState();
 }
+//whenever you click your mouse in the right place at the right time
+function mousePressed() {
+  if (state === 1) {
+    state = 2;
+    lastStateChange = millis();
+  }
+  else if (state === 4 && mouseX >= 100 && mouseX <=400 && mouseY >= 600 && mouseY <= 700) {
+    state = 5;
+    lastStateChange = millis();
+  }
+  else if (state === 4 && mouseX >= 1200 && mouseX <= 1500 && mouseY >= 600 && mouseY <= 700) {
+    state = 6;
+    lastStateChange = millis();
+  }
+}
+
+//WARINGINGGGIN
+//this code is freakin' finger vomit
+//if you want to keep your sanity, then just look at the first one
+//theyre all the same except the last one, which is just the first couple of lines
+//either way you WILL lose your mind looking at this shiz V V V V
+
 
 function checkState() {
-  let elapsedTime = millis() - lastStateChange;
   if (state === 1) {
-    image(house, 0, 0);
-    image(door, 50, 90);
+    image(house, 0, 0, windowWidth, windowHeight);
+  }
+  else if (state === 2) {
+    image(goblin1, 0, 0, windowWidth, windowHeight);
+    let elapsedTime = millis() - lastStateChange;
+    if (elapsedTime >= gobStateDuration) {
+      state = 3;
+      lastStateChange = millis();
+    }
+  }
+  else if (state === 3) {
+    image(goblin2, 0, 0, windowWidth, windowHeight);
+    let elapsedTime = millis() - lastStateChange;
+    if (elapsedTime >= gobStateDuration) {
+      state = 4;
+      lastStateChange = millis();
+    }
+  }
+  else if (state === 4) {
+    image(goblin3, 0, 0, windowWidth, windowHeight);
+    image(leavingButton, 0, 0, windowWidth, windowHeight);
+    image(stayingButton, 0, 0, windowWidth, windowHeight);
+  }
+  else if (state === 5) {
+    image(goblinLeave, 0, 0, windowWidth, windowHeight);
+  }
+  else if (state === 6) {
+    image(goblinPolice1, 0, 0, windowWidth, windowHeight);
+    let elapsedTime = millis() - lastStateChange;
+    if (elapsedTime >= gobStateDuration) {
+      state = 7;
+      lastStateChange = millis();
+    }
+  }
+  else if (state === 7) {
+    image(goblinPolice2, 0, 0, windowWidth, windowHeight);
+    let elapsedTime = millis() - lastStateChange;
+    if (elapsedTime >= gobStateDuration) {
+      state = 8;
+      lastStateChange = millis();
+    }
+  }
+  else if (state === 8) {
+    image(ending1, 0, 0, windowWidth, windowHeight);
+    let elapsedTime = millis() - lastStateChange;
+    if (elapsedTime >= gobStateDuration) {
+      state = 9;
+      lastStateChange = millis();
+    }
+  }
+  else if (state === 9) {
+    image(ending2, 0, 0, windowWidth, windowHeight);
+    let elapsedTime = millis() - lastStateChange;
+    if (elapsedTime >= gobStateDuration) {
+      state = 10;
+      lastStateChange = millis();
+    }
+  }
+  else if (state === 10) {
+    image(ending3, 0, 0, windowWidth, windowHeight);
+    let elapsedTime = millis() - lastStateChange;
+    if (elapsedTime >= gobStateDuration) {
+      state = 11;
+      lastStateChange = millis();
+    }
+  }
+  else if (state === 11) {
+    image(ending4, 0, 0, windowWidth, windowHeight);
+    let elapsedTime = millis() - lastStateChange;
+    if (elapsedTime >= gobStateDuration) {
+      state = 12;
+      lastStateChange = millis();
+    }
+  }
+  else if (state === 12) {
+    image(ending5, 0, 0, windowWidth, windowHeight);
+    let elapsedTime = millis() - lastStateChange;
+    if (elapsedTime >= gobStateDuration) {
+      state = 13;
+      lastStateChange = millis();
+    }
+  }
+  else if (state === 13) {
+    image(ending6, 0, 0, windowWidth, windowHeight);
+    let elapsedTime = millis() - lastStateChange;
+    if (elapsedTime >= gobStateDuration) {
+      state = 14;
+      lastStateChange = millis();
+    }
+  }
+  else if (state === 14) {
+    image(ending7, 0, 0, windowWidth, windowHeight);
   }
 }
-
-function clickDoor() {
-  if (mouseIsPressed() && mouseX >= 50 && mouseX <= 90 && mouseY >= 90 && mouseY <= 50) {
-    state = 2;
-  }
-}
+//told ya it was finger vomit
