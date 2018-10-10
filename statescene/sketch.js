@@ -65,17 +65,17 @@ function mousePressed() {
     state = 2;
     lastStateChange = millis();
   }
-  else if (state === 4 && mouseX >= 100 && mouseX <=400 && mouseY >= 600 && mouseY <= 700) {
+  else if (state === 4 && mouseX >= 60 && mouseX <=390 && mouseY >= 550 && mouseY <= 700) {
     state = 5;
     lastStateChange = millis();
   }
-  else if (state === 4 && mouseX >= 1200 && mouseX <= 1500 && mouseY >= 600 && mouseY <= 700) {
+  else if (state === 4 && mouseX >= 1150 && mouseX <= 1500 && mouseY >= 550 && mouseY <= 700) {
     state = 6;
     lastStateChange = millis();
   }
 }
 
-//WARINGINGGGIN
+//WARNING
 //this code is freakin' finger vomit
 //if you want to keep your sanity, then just look at the first one
 //theyre all the same except the last one, which is just the first couple of lines
