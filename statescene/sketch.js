@@ -6,6 +6,7 @@
 
 let state;
 let gobStateDuration = 2000;
+let lastEndingDuration = 4000;
 let lastStateChange;
 
 //holy bagoli look at all these image variables
@@ -66,7 +67,7 @@ function mousePressed() {
     lastStateChange = millis();
   }
   else if (state === 4 && mouseX >= 60 && mouseX <=390 && mouseY >= 550 && mouseY <= 700) {
-    state = 5;
+    state = 5; //ending state
     lastStateChange = millis();
   }
   else if (state === 4 && mouseX >= 1150 && mouseX <= 1500 && mouseY >= 550 && mouseY <= 700) {
@@ -106,8 +107,8 @@ function checkState() {
     image(goblin3, 0, 0, windowWidth, windowHeight);
     image(leavingButton, 0, 0, windowWidth, windowHeight);
     image(stayingButton, 0, 0, windowWidth, windowHeight);
-  }
-  else if (state === 5) {
+  } // V V button states V V
+  else if (state === 5) { //ending state
     image(goblinLeave, 0, 0, windowWidth, windowHeight);
   }
   else if (state === 6) {
@@ -124,7 +125,7 @@ function checkState() {
     if (elapsedTime >= gobStateDuration) {
       state = 8;
       lastStateChange = millis();
-    }
+    } //these are all the ending frames, theres a lot of them
   }
   else if (state === 8) {
     image(ending1, 0, 0, windowWidth, windowHeight);
@@ -169,7 +170,7 @@ function checkState() {
   else if (state === 13) {
     image(ending6, 0, 0, windowWidth, windowHeight);
     let elapsedTime = millis() - lastStateChange;
-    if (elapsedTime >= gobStateDuration) {
+    if (elapsedTime >= lastEndingDuration) {
       state = 14;
       lastStateChange = millis();
     }
