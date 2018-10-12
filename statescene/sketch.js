@@ -29,6 +29,10 @@ let ending5;
 let ending6;
 let ending7;
 
+let goblinHeart1;
+let goblinHeart2;
+let goblinHeart3;
+
 function preload() { //oh wow these image variables are turning into images
   state = 1;
   lastStateChange = 0;
@@ -50,6 +54,10 @@ function preload() { //oh wow these image variables are turning into images
   ending5 = loadImage("assets/Ending 5.png");
   ending6 = loadImage("assets/Ending 6.png");
   ending7 = loadImage("assets/Ending 7.png");
+
+  goblinHeart1 = loadImage("assets/Goblin Heart 1.png");
+  goblinHeart2 = loadImage("assets/Goblin Heart 2.png");
+  goblinHeart3 = loadImage("assets/Goblin Heart 3.png");
 }
 //phew we're away from the images
 function setup() {
@@ -72,6 +80,10 @@ function mousePressed() {
   }
   else if (state === 4 && mouseX >= 1150 && mouseX <= 1500 && mouseY >= 550 && mouseY <= 700) {
     state = 6;
+    lastStateChange = millis();
+  }
+  else if (state === 7 && mouseX >= 575 && mouseX <= 750 && mouseY >= 300 && mouseY <= 500) {
+    state = 15;
     lastStateChange = millis();
   }
 }
@@ -177,6 +189,25 @@ function checkState() {
   }
   else if (state === 14) {
     image(ending7, 0, 0, windowWidth, windowHeight);
+  }
+  else if (state === 15) {
+    image(goblinHeart1, 0, 0, windowWidth, windowHeight);
+    let elapsedTime = millis() - lastStateChange;
+    if (elapsedTime >= gobStateDuration) {
+      state = 16;
+      lastStateChange = millis();
+    }
+  }
+  else if (state === 16) {
+    image(goblinHeart2, 0, 0, windowWidth, windowHeight);
+    let elapsedTime = millis() - lastStateChange;
+    if (elapsedTime >= gobStateDuration) {
+      state = 17;
+      lastStateChange = millis();
+    }
+  }
+  else if (state === 17) {
+    image(goblinHeart3, 0, 0, windowWidth, windowHeight);
   }
 }
 //told ya it was finger vomit
