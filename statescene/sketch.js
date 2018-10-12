@@ -88,6 +88,10 @@ function mousePressed() {
   }
 }
 
+function hospitalMinigame() {
+
+}
+
 //WARNING
 //this code is freakin' finger vomit
 //if you want to keep your sanity, then just look at the first one
@@ -213,6 +217,9 @@ function checkState() {
       state = 18;
       lastStateChange = millis();
     }
+  }
+  else if (state === 18) {
+    hospitalMinigame();
   }
 }
 //told ya it was finger vomit
