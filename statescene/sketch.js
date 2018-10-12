@@ -208,6 +208,11 @@ function checkState() {
   }
   else if (state === 17) {
     image(goblinHeart3, 0, 0, windowWidth, windowHeight);
+    let elapsedTime = millis() - lastStateChange;
+    if (elapsedTime >= gobStateDuration) {
+      state = 18;
+      lastStateChange = millis();
+    }
   }
 }
 //told ya it was finger vomit
