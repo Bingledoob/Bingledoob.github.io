@@ -96,6 +96,7 @@ function hospitalMinigame() {
   
 }
 
+
 //WARNING
 //this code is freakin' finger vomit
 //if you want to keep your sanity, then just look at the first one
