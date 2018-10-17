@@ -33,7 +33,6 @@ let ending7;
 let goblinHeart1;
 let goblinHeart2;
 let goblinHeart3;
-let sad;
 
 function preload() { //oh wow these image variables are turning into images
   theWidth = windowWidth;
