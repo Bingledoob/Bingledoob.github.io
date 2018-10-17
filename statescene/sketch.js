@@ -33,10 +33,11 @@ let ending7;
 let goblinHeart1;
 let goblinHeart2;
 let goblinHeart3;
+let sad;
 
 function preload() { //oh wow these image variables are turning into images
   theWidth = windowWidth;
-  theHeight = 8 / 16 * theWidth;
+  theHeight = 7.8 / 16 * theWidth;
   state = 1;
   lastStateChange = 0;
   house = loadImage("assets/House Background.png");
@@ -93,7 +94,7 @@ function mousePressed() {
 }
 
 function hospitalMinigame() {
-  
+
 }
 
 
