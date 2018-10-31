@@ -7,14 +7,13 @@ let cols = 9;
 let grid;
 let cellSize;
 let plantID;
-let zombieHealth;
 
+let peaPooterSeed;
 let peaPooter;
-let lightPetal;
-let peaPoot;
-let lightPet;
 let zombieFull;
-let zombieHalf;
+
+let peaDeathRate = 6000;
+let zombieMoveRate = 3000;
 
 function setup() {
   if (windowWidth > windowHeight) {
@@ -27,32 +26,27 @@ function setup() {
   cellSize = width / 1.5 / cols;
   grid = createLawn(cols, rows);
 
-  peaPooter = loadImage("assets/PeaPooterSeed.png");
-  lightPetal = loadImage("assets/LightPetalSeed.png");
-  peaPoot = loadImage("assets/PeaPoot.png");
-  lightPet = loadImage("assets/LightPet");
+  peaPooterSeed = loadImage("assets/PeaPooterSeed.png");
+  peaPooter = loadImage("assets/PeaPooter.png");
   zombieFull = loadImage("assets/ZombieFullHealth");
-  zombieHalf = loadImage("assets/ZombieHalfHealth");
 
   plantID = 0;
-  zombieHealth = 10;
 }
 
 function draw() {
   background(255);
   displayLawn();
   displaySeeds();
-  zombieSpawn();
+  // zombieSpawn();
 }
 
 function displaySeeds() {
-  image(peaPooter, 0, 280);
-  image(lightPetal, 100, 280);
+  image(peaPooterSeed, 0, 280);
 }
 
-function zombieSpawn() {
-
-}
+// function zombieSpawn() {
+//
+// }
 
 // V V V   Planting Stuff   V V V \\
 
@@ -60,7 +54,6 @@ function mousePressed() {
 
   //plant ID 0: Nothing
   //plant ID 1: Peapooter
-  //plant ID 2: Light Petal
 
   if (mouseX > 0 && mouseX < 100 && mouseY > 280 && mouseY < 480) {
 
@@ -68,35 +61,30 @@ function mousePressed() {
       plantID = 1;
     }
   }
-  if (mouseX > 100 && mouseX < 200 && mouseY > 280 && mouseY < 480) {
 
-    if (plantID === 0) {
-      plantID = 2;
-    }
-  }
-
-  if (mouseX > 0 && mouseX < 66.7 && mouseY > 0 && mouseY < 66.7 ) {
-
-    if (plantID === 1) {
-      image(peaPoot, 0, 0);
-      plantID = 0;
-    }
-
-    if (plantID === 2) {
-      image(lightPet, 0, 0);
-      plantID = 0;
-    }
-
-  }
+  // if (mouseX > 0 && mouseX < 66.7 && mouseY > 0 && mouseY < 66.7 ) {
+  //
+  //   if (plantID === 1) {
+  //     image(peaPooter, 0, 0);
+  //     plantID = 0;
+  //   }
+  // }
 }
 
 //tiles are 66.7 X 66.7
 
 function displayLawn() {
+  grid = 1;  //<<< BIG ERROR; Try to make it so that it affects EVERY grid space
   for (let y = 0; y < rows; y++) {
     for (let x = 0; x < cols; x++) {
-      fill(62, 155, 62);
-      rect(x*cellSize, y*cellSize, cellSize, cellSize);
+      if (grid[y][x] === 0) {
+        fill(62, 155, 62);
+        noStroke();
+        rect(x*cellSize, y*cellSize, cellSize, cellSize);
+      }
+      if (grid[y][x] === 1) {
+        image(peaPooter, x*cellSize, y*cellSize, cellSize, cellSize);
+      }
     }
   }
 }
