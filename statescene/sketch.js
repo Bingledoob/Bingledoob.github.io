@@ -8,7 +8,6 @@ let theWidth, theHeight;
 let state;
 let gobStateDuration = 2000;
 let lastEndingDuration = 4000;
-let gifDuration = 30;
 let lastStateChange;
 
 //holy bagoli look at all these image variables

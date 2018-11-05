@@ -1,4 +1,4 @@
-// Plants Vs. Zombies Array
+// Plants Vs. Zombies Array Assignment
 // Dylan Yelich
 // October 26, 2018
 
@@ -6,14 +6,20 @@ let rows = 5;
 let cols = 9;
 let grid;
 let cellSize;
-let plantID;
 
 let peaPooterSeed;
 let peaPooter;
-let zombieFull;
+let zombieMan;
 
 let peaDeathRate = 6000;
 let zombieMoveRate = 3000;
+let peaRecharge = 5000;
+let zombieSpawnRate = 4000;
+let lastChangeR;
+let lastChangeZ;
+let lastChangeD;
+let lastChangeZ2;
+let zombiePlacement;
 
 function setup() {
   if (windowWidth > windowHeight) {
@@ -22,59 +28,69 @@ function setup() {
   else {
     createCanvas(windowWidth, windowWidth);
   }
-
   cellSize = width / 1.5 / cols;
+  lastChangeR = 0;
+  lastChangeZ = 0;
+  lastChangeD = 0;
+  lastChangeZ2 = 0;
   grid = createLawn(cols, rows);
-
   peaPooterSeed = loadImage("assets/PeaPooterSeed.png");
   peaPooter = loadImage("assets/PeaPooter.png");
-  zombieFull = loadImage("assets/ZombieFullHealth");
-
-  plantID = 0;
+  zombieMan = loadImage("assets/Zombie.png");
 }
 
 function draw() {
   background(255);
-  displayLawn();
-  displaySeeds();
-  // zombieSpawn();
-}
-
-function displaySeeds() {
   image(peaPooterSeed, 0, 280);
+  displayLawn();
+  placeZombie();
 }
 
-// function zombieSpawn() {
-//
-// }
+function placeZombie() {
+  let elapsedTimeZ = millis() - lastChangeZ;
+  zombiePlacement = floor(random(1, 5));
+  if (elapsedTimeZ >= zombieSpawnRate) {
+    if (zombiePlacement === 1) {
+      grid[0][8] = 2;
+      zombiePlacement = random(1, 5);
+    }
+    if (zombiePlacement === 2) {
+      grid[1][8] = 2;
+      zombiePlacement = random(1, 5);
+    }
+    if (zombiePlacement === 3) {
+      grid[2][8] = 2;
+      zombiePlacement = random(1, 5);
+    }
+    if (zombiePlacement === 4) {
+      grid[3][8] = 2;
+      zombiePlacement = random(1, 5);
+    }
+    if (zombiePlacement === 5) {
+      grid[4][8] = 2;
+      zombiePlacement = random(1, 5);
+    }
+    lastChangeZ = millis();
+  }
+}
 
-// V V V   Planting Stuff   V V V \\
+// V V V   Planting Peas and Recharging Sprite Thingy   V V V \\
 
 function mousePressed() {
-
-  //plant ID 0: Nothing
-  //plant ID 1: Peapooter
-
-  if (mouseX > 0 && mouseX < 100 && mouseY > 280 && mouseY < 480) {
-
-    if (plantID === 0) {
-      plantID = 1;
+  let x = floor(mouseX / cellSize);
+  let y = floor(mouseY / cellSize);
+  let elapsedTimeR = millis() - lastChangeR;
+  if (elapsedTimeR >= peaRecharge) {
+    if (grid[y][x] === 0) {
+      grid[y][x] = 1;
     }
+    lastChangeR = millis();
   }
-
-  // if (mouseX > 0 && mouseX < 66.7 && mouseY > 0 && mouseY < 66.7 ) {
-  //
-  //   if (plantID === 1) {
-  //     image(peaPooter, 0, 0);
-  //     plantID = 0;
-  //   }
-  // }
 }
 
 //tiles are 66.7 X 66.7
 
 function displayLawn() {
-  grid = 1;  //<<< BIG ERROR; Try to make it so that it affects EVERY grid space
   for (let y = 0; y < rows; y++) {
     for (let x = 0; x < cols; x++) {
       if (grid[y][x] === 0) {
@@ -84,6 +100,14 @@ function displayLawn() {
       }
       if (grid[y][x] === 1) {
         image(peaPooter, x*cellSize, y*cellSize, cellSize, cellSize);
+      }
+      if (grid[y][x] === 2) {
+        let elapsedTimeZ2 = millis() - lastChangeZ2;
+        image(zombieMan, x*cellSize, y*cellSize, cellSize, cellSize);
+        if (elapsedTimeZ2 >= zombieMoveRate) {
+          grid[x]--;
+        }
+        lastChangeZ2 = millis();
       }
     }
   }
