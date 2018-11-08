@@ -7,6 +7,7 @@ let cols = 9;
 let grid;
 let cellSize;
 
+let grassWalk;
 let peaPooterSeed;
 let peaPooter;
 let zombieMan;
@@ -21,6 +22,14 @@ let lastChangeD;
 let lastChangeZ2;
 let zombiePlacement;
 
+function preload() {
+  grassWalk = loadSound("assets/GrasswalkMIDI.mp3");
+  grid = createLawn(cols, rows);
+  peaPooterSeed = loadImage("assets/PeaPooterSeed.png");
+  peaPooter = loadImage("assets/PeaPooter.png");
+  zombieMan = loadImage("assets/Zombie.png");
+}
+
 function setup() {
   if (windowWidth > windowHeight) {
     createCanvas(windowHeight, windowHeight);
@@ -33,10 +42,8 @@ function setup() {
   lastChangeZ = 0;
   lastChangeD = 0;
   lastChangeZ2 = 0;
-  grid = createLawn(cols, rows);
-  peaPooterSeed = loadImage("assets/PeaPooterSeed.png");
-  peaPooter = loadImage("assets/PeaPooter.png");
-  zombieMan = loadImage("assets/Zombie.png");
+  grassWalk.loop();
+
 }
 
 function draw() {
@@ -105,13 +112,17 @@ function displayLawn() {
         let elapsedTimeZ2 = millis() - lastChangeZ2;
         image(zombieMan, x*cellSize, y*cellSize, cellSize, cellSize);
         if (elapsedTimeZ2 >= zombieMoveRate) {
-          grid[x]--;
+          grid[y][x] = 0;
+          grid[y][x-1] = 2;
         }
         lastChangeZ2 = millis();
+
+
       }
     }
   }
 }
+
 
 function createLawn(cols, rows) {
   let grid = [];
