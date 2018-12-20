@@ -6,27 +6,52 @@ let theWidth, theHeight;
 
 let state;
 
-let textBox;
-let boxText;
+let textBoxNormal;
+let normalTextbox;
 let noText;
 let textColor;
 let characterTalk;
 
-
+//character variables
 let showJay;
 let jay;
 
+let showGooblij;
+let gooblij;
+
+let showChiara;
+let chiara;
+
+let showKahl;
+let kahl;
+
+let showFalmer;
+let falmer;
+
+
+//jay emotion variables
 let jayEmotion;
 let jayNeutral;
 let jayDisgruntled;
-
 let jayConfusedOpen;
+
+//gooblij emotion variables
+
+
+//chiara emotion variables
+
+
+//kahl emotion variables
+
+
+//falmer emotion variables
+
 
 let startScreen;
 let backgroundStart;
 
 
-class Textbox {
+class TextboxNormal {
   constructor(){
     this.x = 0;
     this.y = 0;
@@ -37,7 +62,7 @@ class Textbox {
       text.font="25px Arial";
       text.fillStyle = textColor;
       text.textAlign = "center";
-      image(textBox, 0, 0, theWidth, theHeight);
+      image(textBoxNormal, 0, 0, theWidth, theHeight);
       text.fillText(characterTalk, canvas.width/2, canvas.height-150);
     }
   }
@@ -63,6 +88,50 @@ class Jay {
   }
 }
 
+class Gooblij {
+  constructor (){
+    this.x = 0;
+    this.y = 0;
+  }
+  display() {
+    // if (showGooblij === true) {
+    // }
+  }
+}
+
+class Chiara {
+  constructor (){
+    this.x = 0;
+    this.y = 0;
+  }
+  display() {
+    // if (showChiara === true) {
+    // }
+  }
+}
+
+class Kahl {
+  constructor (){
+    this.x = 0;
+    this.y = 0;
+  }
+  display() {
+    // if (showKahl === true) {
+    // }
+  }
+}
+
+class Falmer {
+  constructor (){
+    this.x = 0;
+    this.y = 0;
+  }
+  display() {
+    // if (showFalmer === true) {
+    // }
+  }
+}
+
 function preload() {
   showJay = false;
   noText = false;
@@ -70,19 +139,40 @@ function preload() {
   theHeight = 7.8 / 16 * theWidth;
   state = 0;
 
-  textBox = loadImage("assets/textbox.png");
+  //backgrounds, textboxes, etc.
+  textBoxNormal = loadImage("assets/textboxNormal.png");
   startScreen = loadImage("assets/startScreen.png");
   backgroundStart = loadImage("assets/backgroundStart.png");
+
   //jay's emotions
   jayNeutral = loadImage("assets/Jay Neutral.png");
   jayDisgruntled = loadImage("assets/Jay Disgruntled.png");
   jayConfusedOpen = loadImage("assets/Jay Confused (Mouth).png");
+
+  //gooblij's emotions
+
+
+  //kahl's emotions
+
+
+  //chiara's emotions
+
+
+  //the falmer's emotions
+
+
 }
 
 function setup() {
   createCanvas(theWidth, theHeight);
-  boxText = new Textbox();
+
+  normalTextbox = new TextboxNormal();
+
   jay = new Jay;
+  gooblij = new Gooblij;
+  chiara = new Chiara;
+  kahl = new Kahl;
+  falmer = new Falmer;
 
 }
 
@@ -90,9 +180,15 @@ function draw() {
   background(255);
   checkPeriod();
   jay.display();
-  boxText.display();
+  gooblij = new Gooblij;
+  chiara = new Chiara;
+  kahl = new Kahl;
+  falmer = new Falmer;
+
+  normalTextbox.display();
 }
 
+//Mouse State Changes
 function mousePressed() {
   if (state === 0) {
     state = 1;
@@ -109,19 +205,20 @@ function mousePressed() {
   else if (state === 4) {
     state = 5;
   }
-  else if (state === 5) { //
+  else if (state === 5) {
     state = 6;
   }
-  else if (state === 6) { //
-    state = 7;
-  }
-  else if (state === 7) { //
-    state = 8;
-  }
+  // else if (state === 6) {
+  //   state = 7;
+  // }
+  // else if (state === 7) {
+  //   state = 8;
+  // }
 
 
 }
 
+//Dialouge
 function checkPeriod(){
   if (state === 0) {
     image(startScreen, 0, 0, theWidth, theHeight);
