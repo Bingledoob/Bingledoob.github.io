@@ -17,8 +17,8 @@ let goblin2;
 let goblin3;
 let leavingButton;
 let stayingButton;
-
 let goblinLeave;
+
 //wowie theres more
 let goblinPolice1;
 let goblinPolice2;
@@ -29,7 +29,6 @@ let ending4;
 let ending5;
 let ending6;
 let ending7;
-
 let goblinHeart1;
 let goblinHeart2;
 let goblinHeart3;
