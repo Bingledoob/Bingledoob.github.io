@@ -36,6 +36,8 @@ let jayNeutralMouth;
 let jayDisgruntled;
 let jayDisgruntledMouth;
 let jayConfusedMouth;
+let jayDetermined;
+let jayDeterminedMouth;
 
 //gooblij emotion variables
 let gooblijEmotion;
@@ -96,6 +98,12 @@ class Jay {
       }
       else if (jayEmotion === 5) {
         image(jayDisgruntledMouth, 0, 0, theWidth, theHeight);
+      }
+      else if (jayEmotion === 6) {
+        image(jayDetermined, 0, 0, theWidth, theHeight);
+      }
+      else if (jayEmotion === 7) {
+        image(jayDeterminedMouth, 0, 0, theWidth, theHeight);
       }
     }
   }
@@ -180,6 +188,8 @@ function preload() {
   jayDisgruntled = loadImage("assets/Jay Disgruntled.png");
   jayDisgruntledMouth = loadImage("assets/Jay Disgruntled (Mouth).png");
   jayConfusedMouth = loadImage("assets/Jay Confused (Mouth).png");
+  jayDetermined = loadImage("assets/Jay Determined.png");
+  jayDeterminedMouth = loadImage("assets/Jay Determined (Mouth).png");
 
   //gooblij's emotions
   gooblijSmile = loadImage("assets/Gooblij Smile.png");
@@ -240,12 +250,12 @@ function mousePressed() {
   else if (state === 5) {
     state = 6;
   }
-  // else if (state === 6) {
-  //   state = 7;
-  // }
-  // else if (state === 7) {
-  //   state = 8;
-  // }
+  else if (state === 6) {
+    state = 7;
+  }
+  else if (state === 7) {
+    state = 8;
+  }
 
 
 }
@@ -290,5 +300,17 @@ function checkPeriod(){
     textColor = "white";
     characterTalk = "H-hey! I prefer 'tolerable'...";
     jayEmotion = 5;
+  }
+  else if (state === 7) {
+    image(backgroundStart, 0, 0, theWidth, theHeight);
+    textColor = "black";
+    characterTalk = "Well, you better get going Jay.";
+    jayEmotion = 1;
+  }
+  else if (state === 8) {
+    image(backgroundStart, 0, 0, theWidth, theHeight);
+    textColor = "black";
+    characterTalk = "Those customers wouldn't want a cold pizza.";
+    jayEmotion = 6;
   }
 }
