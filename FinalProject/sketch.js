@@ -25,26 +25,33 @@ let chiara;
 let showKahl;
 let kahl;
 
-let showFalmer;
-let falmer;
+let showFalia;
+let falia;
 
 
 //jay emotion variables
 let jayEmotion;
 let jayNeutral;
+let jayNeutralMouth;
 let jayDisgruntled;
-let jayConfusedOpen;
+let jayDisgruntledMouth;
+let jayConfusedMouth;
 
 //gooblij emotion variables
-
+let gooblijEmotion;
+let gooblijSmile;
 
 //chiara emotion variables
-
+let chiaraEmotion;
+let chiaraSmile;
 
 //kahl emotion variables
+let kahlEmotion;
+let kahlNeutral;
 
-
-//falmer emotion variables
+//falia emotion variables
+let faliaEmotion;
+let faliaNeutral;
 
 
 let startScreen;
@@ -79,10 +86,16 @@ class Jay {
         image(jayNeutral, 0, 0, theWidth, theHeight);
       }
       else if (jayEmotion === 2) {
-        image(jayDisgruntled, 0, 0, theWidth, theHeight);
+        image(jayNeutralMouth, 0, 0, theWidth, theHeight);
       }
       else if (jayEmotion === 3) {
-        image(jayConfusedOpen, 0, 0, theWidth, theHeight);
+        image(jayConfusedMouth, 0, 0, theWidth, theHeight);
+      }
+      else if (jayEmotion === 4) {
+        image(jayDisgruntled, 0, 0, theWidth, theHeight);
+      }
+      else if (jayEmotion === 5) {
+        image(jayDisgruntledMouth, 0, 0, theWidth, theHeight);
       }
     }
   }
@@ -94,8 +107,11 @@ class Gooblij {
     this.y = 0;
   }
   display() {
-    // if (showGooblij === true) {
-    // }
+    if (showGooblij === true) {
+      if (gooblijEmotion === 1) {
+        image(gooblijSmile, 0, 0, theWidth, theHeight);
+      }
+    }
   }
 }
 
@@ -105,8 +121,11 @@ class Chiara {
     this.y = 0;
   }
   display() {
-    // if (showChiara === true) {
-    // }
+    if (showChiara === true) {
+      if (chiaraEmotion === 1) {
+        image(chiaraSmile, 0, 0, theWidth, theHeight);
+      }
+    }
   }
 }
 
@@ -116,25 +135,36 @@ class Kahl {
     this.y = 0;
   }
   display() {
-    // if (showKahl === true) {
-    // }
+    if (showKahl === true) {
+      if (kahlEmotion === 1) {
+        image(kahlNeutral, 0, 0, theWidth, theHeight);
+      }
+    }
   }
 }
 
-class Falmer {
+class Falia {
   constructor (){
     this.x = 0;
     this.y = 0;
   }
   display() {
-    // if (showFalmer === true) {
-    // }
+    if (showFalia === true) {
+      if (faliaEmotion === 1) {
+        image(faliaNeutral, 0, 0, theWidth, theHeight);
+      }
+    }
   }
 }
 
 function preload() {
   showJay = false;
+  showGooblij = false;
+  showChiara = false;
+  showKahl = false;
+  showFalia = false;
   noText = false;
+
   theWidth = windowWidth;
   theHeight = 7.8 / 16 * theWidth;
   state = 0;
@@ -146,20 +176,22 @@ function preload() {
 
   //jay's emotions
   jayNeutral = loadImage("assets/Jay Neutral.png");
+  jayNeutralMouth = loadImage("assets/Jay Neutral (Mouth).png");
   jayDisgruntled = loadImage("assets/Jay Disgruntled.png");
-  jayConfusedOpen = loadImage("assets/Jay Confused (Mouth).png");
+  jayDisgruntledMouth = loadImage("assets/Jay Disgruntled (Mouth).png");
+  jayConfusedMouth = loadImage("assets/Jay Confused (Mouth).png");
 
   //gooblij's emotions
-
+  gooblijSmile = loadImage("assets/Gooblij Smile.png");
 
   //kahl's emotions
-
+  kahlNeutral = loadImage("assets/Kahl Neutral.png");
 
   //chiara's emotions
+  chiaraSmile = loadImage("assets/Chiara Smile.png");
 
-
-  //the falmer's emotions
-
+  //falia's emotions
+  faliaNeutral = loadImage("assets/Falia Neutral.png");
 
 }
 
@@ -172,7 +204,7 @@ function setup() {
   gooblij = new Gooblij;
   chiara = new Chiara;
   kahl = new Kahl;
-  falmer = new Falmer;
+  falia = new Falia;
 
 }
 
@@ -183,7 +215,7 @@ function draw() {
   gooblij = new Gooblij;
   chiara = new Chiara;
   kahl = new Kahl;
-  falmer = new Falmer;
+  falia = new Falia;
 
   normalTextbox.display();
 }
@@ -251,12 +283,12 @@ function checkPeriod(){
     image(backgroundStart, 0, 0, theWidth, theHeight);
     textColor = "black";
     characterTalk = "Aren't you cute.";
-    jayEmotion = 2;
+    jayEmotion = 4;
   }
   else if (state === 6) {
     image(backgroundStart, 0, 0, theWidth, theHeight);
     textColor = "white";
     characterTalk = "H-hey! I prefer 'tolerable'...";
-    jayEmotion = 2; //make a speaking option
+    jayEmotion = 5;
   }
 }
