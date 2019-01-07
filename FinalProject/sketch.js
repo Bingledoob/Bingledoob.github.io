@@ -55,6 +55,12 @@ let kahlNeutral;
 let faliaEmotion;
 let faliaNeutral;
 
+//minigame assets
+let street;
+let vehicle;
+let car;
+
+
 
 let startScreen;
 let backgroundStart;
@@ -203,6 +209,11 @@ function preload() {
   //falia's emotions
   faliaNeutral = loadImage("assets/Falia Neutral.png");
 
+  //minigame assets
+  street = loadImage("assets/street.png");
+  vehicle = loadImage("assets/vehicle.png");
+  car = loadImage("assets/car.png");
+
 }
 
 function setup() {
@@ -255,6 +266,9 @@ function mousePressed() {
   }
   else if (state === 7) {
     state = 8;
+  }
+  else if (state === 8) {
+    state = 9;
   }
 
 
@@ -313,4 +327,13 @@ function checkPeriod(){
     characterTalk = "Those customers wouldn't want a cold pizza.";
     jayEmotion = 6;
   }
+  else if (state === 9) {
+    bikingMinigame();
+  }
+}
+
+function bikingMinigame() {
+  showJay = false;
+  noText = true;
+  image(street, 0, 0, theWidth, theHeight);
 }
