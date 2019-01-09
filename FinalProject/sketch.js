@@ -3,8 +3,9 @@
 // December 20, 2018
 
 let theWidth, theHeight;
-
 let state;
+let minigameDuration = 30000;
+let stateChange;
 
 let textBoxNormal;
 let normalTextbox;
@@ -60,6 +61,8 @@ let street;
 let vehicle;
 let car;
 
+let showVehicle;
+
 
 
 let startScreen;
@@ -79,6 +82,24 @@ class TextboxNormal {
       text.textAlign = "center";
       image(textBoxNormal, 0, 0, theWidth, theHeight);
       text.fillText(characterTalk, canvas.width/2, canvas.height-150);
+    }
+  }
+}
+
+class Vehicle {
+  constructor() {
+    this.x = 0;
+    this.y = 500;
+    if (keyIsPressed && key === "w") {
+      this.x = 250;
+    }
+    if (keyIsPressed && key === "s") {
+      this.x = 750;
+    }
+  }
+  display() {
+    if (showVehicle === true) {
+      image(vehicle, 0, 0, theWidth, theHeight);
     }
   }
 }
@@ -178,10 +199,12 @@ function preload() {
   showKahl = false;
   showFalia = false;
   noText = false;
+  showVehicle = false;
 
   theWidth = windowWidth;
   theHeight = 7.8 / 16 * theWidth;
   state = 0;
+  stateChange = millis();
 
   //backgrounds, textboxes, etc.
   textBoxNormal = loadImage("assets/textboxNormal.png");
@@ -226,17 +249,21 @@ function setup() {
   chiara = new Chiara;
   kahl = new Kahl;
   falia = new Falia;
+  vehicle = new Vehicle;
 
 }
 
 function draw() {
   background(255);
   checkPeriod();
+
   jay.display();
-  gooblij = new Gooblij;
-  chiara = new Chiara;
-  kahl = new Kahl;
-  falia = new Falia;
+  gooblij.display();
+  chiara.display();
+  kahl.display();
+  falia.display();
+
+  vehicle.display();
 
   normalTextbox.display();
 }
@@ -269,6 +296,9 @@ function mousePressed() {
   }
   else if (state === 8) {
     state = 9;
+  }
+  else if (state === 10) {
+    state = 10;
   }
 
 
@@ -328,12 +358,20 @@ function checkPeriod(){
     jayEmotion = 6;
   }
   else if (state === 9) {
-    bikingMinigame();
+    image(street, 0, 0, theWidth, theHeight);
+    showJay = false;
+    noText = true;
+    showVehicle = true;
+    let elapsedTime = millis() - stateChange;
+    if (elapsedTime >= minigameDuration) {
+      state = 10;
+    }
   }
-}
-
-function bikingMinigame() {
-  showJay = false;
-  noText = true;
-  image(street, 0, 0, theWidth, theHeight);
+  else if (state === 10) {
+    image(backgroundStart, 0, 0, theWidth, theHeight);
+    showJay = true;
+    noText = false;
+    showVehicle = false;
+    characterTalk = "You've made it to your destination.";
+  }
 }
