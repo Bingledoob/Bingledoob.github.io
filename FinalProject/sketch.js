@@ -4,7 +4,6 @@
 
 let theWidth, theHeight;
 let state;
-let minigameDuration = 30000;
 let stateChange;
 
 let textBoxNormal;
@@ -57,13 +56,18 @@ let faliaEmotion;
 let faliaNeutral;
 
 //minigame assets
+let scooter;
 let street;
 let vehicle;
 let car;
 
 let showVehicle;
-
-
+let streetSide;
+let carSpawnRate = 5000;
+let lastChange2;
+let minigameDuration = 60000;
+let lastChange3;
+let milesPerHour = 10;
 
 let startScreen;
 let backgroundStart;
@@ -82,24 +86,6 @@ class TextboxNormal {
       text.textAlign = "center";
       image(textBoxNormal, 0, 0, theWidth, theHeight);
       text.fillText(characterTalk, canvas.width/2, canvas.height-150);
-    }
-  }
-}
-
-class Vehicle {
-  constructor() {
-    this.x = 0;
-    this.y = 500;
-    if (keyIsPressed && key === "w") {
-      this.x = 250;
-    }
-    if (keyIsPressed && key === "s") {
-      this.x = 750;
-    }
-  }
-  display() {
-    if (showVehicle === true) {
-      image(vehicle, 0, 0, theWidth, theHeight);
     }
   }
 }
@@ -192,6 +178,36 @@ class Falia {
   }
 }
 
+class Vehicle {
+  constructor() {
+    this.x = 100;
+    this.y = 100;
+  }
+  display() {
+    if (showVehicle === true) {
+      image(vehicle, this.x, this.y);
+      if (this.y <= 80) {
+        this.y = 79;
+      }
+      if (this.y >= 400) {
+        this.y = 399;
+      }
+    }
+  }
+}
+
+class Car {
+  constructor() {
+    this.x = 1600;
+    this.y;
+  }
+  display() {
+    if (showVehicle === true) {
+      image(car, this.x, this.y);
+    }
+  }
+}
+
 function preload() {
   showJay = false;
   showGooblij = false;
@@ -201,8 +217,8 @@ function preload() {
   noText = false;
   showVehicle = false;
 
-  theWidth = windowWidth;
-  theHeight = 7.8 / 16 * theWidth;
+  theWidth = 1600;
+  theHeight = 790;
   state = 0;
   stateChange = millis();
 
@@ -249,7 +265,7 @@ function setup() {
   chiara = new Chiara;
   kahl = new Kahl;
   falia = new Falia;
-  vehicle = new Vehicle;
+  scooter = new Vehicle;
 
 }
 
@@ -263,9 +279,45 @@ function draw() {
   kahl.display();
   falia.display();
 
-  vehicle.display();
+  scooter.display();
 
   normalTextbox.display();
+}
+
+function spawnVehicle() {
+  let elapsedTime2 = millis() - lastChange2;
+  streetSide = floor(random(1,2));
+  if (elapsedTime2 >= carSpawnRate) {
+
+    if (streetSide === 1) {
+      let elapsedTime3 = millis() - lastChange3;
+      car = new Car;
+      car.display();
+      car.y = 75;
+
+      if (elapsedTime3 >= milesPerHour) {
+        car.x-=10;
+      }
+
+      streetSide = floor(random(1,2));
+      lastChange3 = millis();
+    }
+    if (streetSide === 2) {
+      let elapsedTime3 = millis() - lastChange3;
+      car = new Car;
+      car.display();
+      car.y = 100;
+
+      if (elapsedTime3 >= milesPerHour) {
+        car.x-=10;
+      }
+
+      streetSide = floor(random(1,2));
+      lastChange3 = millis();
+    }
+    lastChange2 = millis();
+  }
+
 }
 
 //Mouse State Changes
@@ -362,7 +414,22 @@ function checkPeriod(){
     showJay = false;
     noText = true;
     showVehicle = true;
+    spawnVehicle();
     let elapsedTime = millis() - stateChange;
+
+    if (keyIsPressed && key === "w") {
+      scooter.y -= 20;
+    }
+    else if (keyIsPressed && key === "s") {
+      scooter.y += 20;
+    }
+    else if (keyIsPressed && key === "d") {
+      scooter.x += 20;
+    }
+    else if (keyIsPressed && key === "a") {
+      scooter.x -= 20;
+    }
+
     if (elapsedTime >= minigameDuration) {
       state = 10;
     }
