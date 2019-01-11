@@ -59,15 +59,20 @@ let faliaNeutral;
 let scooter;
 let street;
 let vehicle;
+let enemyCar;
 let car;
 
 let showVehicle;
 let streetSide;
+
+let minigameDuration = 40000;
+//spawning the car variables
 let carSpawnRate = 5000;
-let lastChange2;
-let minigameDuration = 60000;
-let lastChange3;
-let milesPerHour = 10;
+let lastChange;
+
+//moving the car time variables
+let lastMovement;
+let movementSpeed = 100;
 
 let startScreen;
 let backgroundStart;
@@ -198,12 +203,19 @@ class Vehicle {
 
 class Car {
   constructor() {
-    this.x = 1600;
-    this.y;
+    this.x = 1000;
+    this.y = 0;
   }
   display() {
     if (showVehicle === true) {
       image(car, this.x, this.y);
+
+      let elapsedTime = millis() - lastMovement;
+      if (elapsedTime >= movementSpeed) {
+        car.x = car.x - 10;
+        lastMovement = millis();
+      }
+
     }
   }
 }
@@ -258,15 +270,15 @@ function preload() {
 function setup() {
   createCanvas(theWidth, theHeight);
 
-  normalTextbox = new TextboxNormal();
-
   jay = new Jay;
   gooblij = new Gooblij;
   chiara = new Chiara;
   kahl = new Kahl;
   falia = new Falia;
+
   scooter = new Vehicle;
 
+  normalTextbox = new TextboxNormal();
 }
 
 function draw() {
@@ -285,39 +297,18 @@ function draw() {
 }
 
 function spawnVehicle() {
-  let elapsedTime2 = millis() - lastChange2;
   streetSide = floor(random(1,2));
-  if (elapsedTime2 >= carSpawnRate) {
-
-    if (streetSide === 1) {
-      let elapsedTime3 = millis() - lastChange3;
-      car = new Car;
-      car.display();
-      car.y = 75;
-
-      if (elapsedTime3 >= milesPerHour) {
-        car.x-=10;
-      }
-
-      streetSide = floor(random(1,2));
-      lastChange3 = millis();
-    }
-    if (streetSide === 2) {
-      let elapsedTime3 = millis() - lastChange3;
-      car = new Car;
-      car.display();
-      car.y = 100;
-
-      if (elapsedTime3 >= milesPerHour) {
-        car.x-=10;
-      }
-
-      streetSide = floor(random(1,2));
-      lastChange3 = millis();
-    }
-    lastChange2 = millis();
+  enemyCar = new Car;
+  if (streetSide === 1) {
+    enemyCar.y = 150;
+    streetSide = floor(random(1,2));
+  }
+  else if (streetSide === 2) {
+    enemyCar.y = 400;
+    streetSide = floor(random(1,2));
   }
 
+  enemyCar.display();
 }
 
 //Mouse State Changes
@@ -414,9 +405,14 @@ function checkPeriod(){
     showJay = false;
     noText = true;
     showVehicle = true;
-    spawnVehicle();
-    let elapsedTime = millis() - stateChange;
 
+    let elapsedTime = millis() - lastChange;
+
+    if (elapsedTime >= carSpawnRate) {
+      spawnVehicle();
+      lastChange = millis();
+    }
+    // movement
     if (keyIsPressed && key === "w") {
       scooter.y -= 20;
     }
@@ -430,9 +426,11 @@ function checkPeriod(){
       scooter.x -= 20;
     }
 
-    if (elapsedTime >= minigameDuration) {
+    let elapsedTime2 = millis();
+    if (elapsedTime2 >= minigameDuration) {
       state = 10;
     }
+
   }
   else if (state === 10) {
     image(backgroundStart, 0, 0, theWidth, theHeight);
