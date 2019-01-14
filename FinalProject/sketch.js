@@ -65,14 +65,10 @@ let car;
 let showVehicle;
 let streetSide;
 
-let minigameDuration = 40000;
+let minigameDuration = 45000;
 //spawning the car variables
 let carSpawnRate = 5000;
 let lastChange;
-
-//moving the car time variables
-let lastMovement;
-let movementSpeed = 100;
 
 let startScreen;
 let backgroundStart;
@@ -197,6 +193,12 @@ class Vehicle {
       if (this.y >= 400) {
         this.y = 399;
       }
+      if (this.x <= 80) {
+        this.x = 79;
+      }
+      if (this.x >= 500) {
+        this.x = 499;
+      }
     }
   }
 }
@@ -205,18 +207,15 @@ class Car {
   constructor() {
     this.x = 1000;
     this.y = 0;
+    this.speedX = 1;
   }
   display() {
     if (showVehicle === true) {
       image(car, this.x, this.y);
-
-      let elapsedTime = millis() - lastMovement;
-      if (elapsedTime >= movementSpeed) {
-        car.x = car.x - 10;
-        lastMovement = millis();
-      }
-
     }
+  }
+  update() {
+    this.x -= this.speedX;
   }
 }
 
@@ -294,21 +293,22 @@ function draw() {
   scooter.display();
 
   normalTextbox.display();
+  if (state === 9) {
+    spawnVehicle();
+  }
 }
 
 function spawnVehicle() {
-  streetSide = floor(random(1,2));
+  streetSide = floor(random(0,1));
   enemyCar = new Car;
-  if (streetSide === 1) {
+  if (streetSide === 0) {
     enemyCar.y = 150;
-    streetSide = floor(random(1,2));
   }
-  else if (streetSide === 2) {
+  if (streetSide === 1) {
     enemyCar.y = 400;
-    streetSide = floor(random(1,2));
   }
-
   enemyCar.display();
+  enemyCar.update();
 }
 
 //Mouse State Changes
@@ -409,7 +409,6 @@ function checkPeriod(){
     let elapsedTime = millis() - lastChange;
 
     if (elapsedTime >= carSpawnRate) {
-      spawnVehicle();
       lastChange = millis();
     }
     // movement
