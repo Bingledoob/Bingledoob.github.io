@@ -236,7 +236,7 @@ function preload() {
   showVehicle = false;
 
   theWidth = 1600;
-  theHeight = 790;
+  theHeight =1000;
   state = 0;
   stateChange = millis();
 
