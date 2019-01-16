@@ -1,11 +1,11 @@
-// Interactive Scene
-// Dylan Yelich
+// Draing Program Thing
+//
 // Sept 12
 //
 //CONTROLS: 1 = Black, 2 = White, 3 = Red, 4 = Green, 5 = Blue, 6 = Brown, 7 = Purple, 8 = Yellow, 9 = Pink, 0 = Grey
 //CONTROLS: A = Pen size Small, S = Pen Size Average, D = Pen Size Large, F = Pen Size Thick
 //CONTROLS: W = Resets Drawing and Changes background to White, B = Resets Drawing and Change background to Black
-//CONTROLS: G = Save and Download Drawn Picture to your Computer (Virus Free!)
+//CONTROLS: G = Save and Download Drawn Picture to your Computer (#notavirus)
 //CONTROLS: Z = Draw a Triangle, X = Draw a Square, C = Draw a Circle, V = Draw a Rectangle
 
 function setup() {

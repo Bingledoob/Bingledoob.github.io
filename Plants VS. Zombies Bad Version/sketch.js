@@ -1,5 +1,5 @@
-// Plants Vs. Zombies Array Assignment
-// Dylan Yelich
+// Plants Vs. Zombies Bad Verion
+//
 // October 26, 2018
 
 let rows = 5;
@@ -23,14 +23,9 @@ let lastChangeZ;
 let lastChangeZ2;
 let zombiePlacement;
 
-// let time;
-// let zombieTime;
-
 function preload() {
   grassWalk = loadSound("assets/GrasswalkMIDI.mp3");
   grid = createLawn(cols, rows);
-
-  //grid2 = createTimeLawn();
 
   peaPooterSeed = loadImage("assets/PeaPooterSeed.png");
   peaPooter = loadImage("assets/PeaPooter.png");
@@ -49,8 +44,6 @@ function setup() {
   lastChangeR = 0;
   lastChangeZ = 0;
   lastChangeZ2 = 0;
-  
-  // time = 0;
 
   grassWalk.loop();
 
@@ -61,9 +54,6 @@ function draw() {
   image(peaPooterSeed, 0, 280);
   displayLawn();
   placeZombie();
-
-  // timeLawn();
-
 }
 
 function placeZombie() {
@@ -108,8 +98,6 @@ function mousePressed() {
   }
 }
 
-//tiles are 66.7 X 66.7
-
 function displayLawn() {
   for (let y = 0; y < rows; y++) {
     for (let x = 0; x < cols; x++) {
@@ -123,13 +111,6 @@ function displayLawn() {
       }
       if (grid[y][x] === 2) {
         image(zombieMan, x*cellSize, y*cellSize, cellSize, cellSize);
-        // zombieTime = millis();
-        // if (zombieTime === millis() - zombieMoveRate) {
-        //   grid[y][x] = 0;
-        //   grid[y][x-1] = 2;
-        //   zombieTime = 0;
-        // }
-
         if (grid[y] === 0) {
           image(deadScreen);
         }
@@ -148,44 +129,3 @@ function createLawn(cols, rows) {
   }
   return grid;
 }
-
-//storing zombie's movement milliseconds//
-
-
-
-// let elapsedTimeZ2 = millis() - lastChangeZ2;
-// if (elapsedTimeZ2 >= zombieMoveRate) {
-//   grid[y][x] = 0;
-//   grid[y][x-1] = 2;
-//   lastChangeZ2 = millis();
-// }
-
-
-
-// function createTimeLawn(cols, rows) {
-//   let grid2 = [];
-//   for (let y = 0; y < rows; y++) {
-//     grid2.push([]);
-//     for (let x = 0; x < cols; x++) {
-//       grid2[y].push(0);
-//     }
-//   }
-//   return grid2;
-// }
-//
-// function timeLawn() {
-//   let elapsedTimeZ2 = millis() - lastChangeZ2;
-//   for (let y = 0; y < rows; y++) {
-//     for (let x = 0; x < cols; x++) {
-//       if (grid[y][x] === 0) {
-//         time = 0;
-//       }
-//       if (grid[y][x] === 2) {
-//         time = zombieTime;
-//         if (elapsedTimeZ2 >= zombieMoveRate) {
-//           zombieTime - 4000;
-//         }
-//       }
-//     }
-//   }
-// }

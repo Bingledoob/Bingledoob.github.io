@@ -1,5 +1,5 @@
 // Goblin Friendship Simulator
-// Dylan Yelich
+//
 // September 27
 //
 // Make Frend With Gobbo
