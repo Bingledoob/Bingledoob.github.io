@@ -359,8 +359,19 @@ function mousePressed() {
     state = 9;
   }
   else if (state === 10) {
-    state = 10;
+    state = 11;
   }
+  else if (state === 11) {
+    state = 12;
+  }
+  else if (state === 12) {
+    state = 13;
+  }
+  else if (state === 13) {
+    state = 14;
+  }
+
+
 
 
 
@@ -380,24 +391,20 @@ function checkPeriod(){
   }
   else if (state === 2) {
     image(backgroundStart, 0, 0, theWidth, theHeight);
-    textColor = "black";
     characterTalk = "You're a pizza delivery person delivering the strangest order you've ever gotten;";
   }
   else if (state === 3) {
     image(backgroundStart, 0, 0, theWidth, theHeight);
-    textColor = "black";
     characterTalk = "A quarter pineapple, quarter cheese, quarter candles and quarter dead mice pizza.";
   }
   else if (state === 4) {
     image(backgroundStart, 0, 0, theWidth, theHeight);
-    textColor = "black";
     characterTalk = "Look, it's you now.";
     showJay = true;
     jayEmotion = 1;
   }
   else if (state === 5) {
     image(backgroundStart, 0, 0, theWidth, theHeight);
-    textColor = "black";
     characterTalk = "Aren't you cute.";
     jayEmotion = 4;
   }
@@ -415,7 +422,6 @@ function checkPeriod(){
   }
   else if (state === 8) {
     image(backgroundStart, 0, 0, theWidth, theHeight);
-    textColor = "black";
     characterTalk = "Those customers wouldn't want a cold pizza.";
     jayEmotion = 6;
   }
@@ -448,9 +454,29 @@ function checkPeriod(){
   }
   else if (state === 10) {
     image(outsideHouse, 0, 0, theWidth, theHeight);
-    showJay = true;
     noText = false;
     showVehicle = false;
     characterTalk = "You've made it to your destination.";
+  }
+  else if (state === 11) {
+    image(outsideHouse, 0, 0, theWidth, theHeight);
+    characterTalk = "The customer seems to be in the monster side of town, too.";
+  }
+  else if (state === 12) {
+    image(outsideHouse, 0, 0, theWidth, theHeight);
+    characterTalk = "Best to stay safe.";
+  }
+  else if (state === 13) {
+    image(outsideHouse, 0, 0, theWidth, theHeight);
+    characterTalk = "Who knows what lies behind this door--";
+    let bleh = millis() - millis();
+    if (bleh === 2000) {
+      state = 14;
+    }
+  }
+  else if (state === 14) {
+    image(gnomeIntroduce, 0, 0, theWidth, theHeight);
+    noText = true;
+    gnomeGrunt.play();
   }
 }
