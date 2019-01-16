@@ -1,4 +1,4 @@
-// Goblin Friendship Simulator M.K. 2
+// Goblin Friendship Simulator: Pizza Time Edition
 // Dylan Yelich
 // December 20, 2018
 
@@ -60,7 +60,7 @@ let scooter;
 let street;
 let vehicle;
 let enemyCar;
-let car;
+let carImage;
 
 let showVehicle;
 let streetSide;
@@ -214,15 +214,22 @@ class CarEnemy {
   constructor() {
     this.x = 1400;
     this.y = 0;
-    this.speedX = 1;
+    this.speedX = 10;
   }
   display() {
     if (showVehicle === true) {
-      image(car, this.x, this.y);
+      image(carImage, this.x, this.y);
     }
   }
   update() {
     this.x -= this.speedX;
+    streetSide = floor(random(0,1));
+    if (streetSide === 0) {
+      enemyCar.y = 150;
+    }
+    else if (streetSide === 1) {
+      enemyCar.y = 400;
+    }
   }
 }
 
@@ -235,13 +242,13 @@ function preload() {
   noText = false;
   showVehicle = false;
 
-  theWidth = 1600;
-  theHeight =1000;
+  theWidth = windowWidth;
+  theHeight = 7.8 / 16 * theWidth;
   state = 0;
   stateChange = millis();
 
   //backgrounds, textboxes, etc.
-  gnomeGrunt = loadSound("asset/gnomegrunt.mp3");
+  gnomeGrunt = loadSound("assets/gnomegrunt.mp3");
   textBoxNormal = loadImage("assets/textboxNormal.png");
   startScreen = loadImage("assets/startScreen.png");
   backgroundStart = loadImage("assets/backgroundStart.png");
@@ -274,7 +281,7 @@ function preload() {
   //minigame assets
   street = loadImage("assets/street.png");
   vehicle = loadImage("assets/vehicle.png");
-  car = loadImage("assets/car.png");
+  carImage = loadImage("assets/car.png");
 
 }
 
@@ -288,6 +295,7 @@ function setup() {
   falia = new Falia;
 
   scooter = new Vehicle;
+  enemyCar = new CarEnemy;
 
   normalTextbox = new TextboxNormal();
 }
@@ -303,30 +311,9 @@ function draw() {
   falia.display();
 
   scooter.display();
+  enemyCar.display();
 
   normalTextbox.display();
-  if (state === 9) {
-
-    let elapsedTime = millis() - lastChange;
-
-    if (elapsedTime >= carSpawnRate) {
-      spawnVehicle();
-      lastChange = millis();
-    }
-  }
-}
-
-function spawnVehicle() {
-  enemyCar = new CarEnemy;
-  streetSide = floor(random(0,1));
-  if (streetSide === 0) {
-    enemyCar.y = 150;
-  }
-  else if (streetSide === 1) {
-    enemyCar.y = 400;
-  }
-  enemyCar.display();
-  enemyCar.update();
 }
 
 //Mouse State Changes
@@ -370,11 +357,6 @@ function mousePressed() {
   else if (state === 13) {
     state = 14;
   }
-
-
-
-
-
 }
 
 //Dialouge
@@ -430,7 +412,7 @@ function checkPeriod(){
     showJay = false;
     noText = true;
     showVehicle = true;
-
+    enemyCar.update();
 
     // movement
     if (keyIsPressed && key === "w") {
@@ -446,8 +428,8 @@ function checkPeriod(){
       scooter.x -= 20;
     }
 
-    let elapsedTime2 = millis();
-    if (elapsedTime2 >= minigameDuration) {
+    let elapsedTime = millis() - stateChange;
+    if (elapsedTime >= minigameDuration) {
       state = 10;
     }
 
@@ -468,11 +450,7 @@ function checkPeriod(){
   }
   else if (state === 13) {
     image(outsideHouse, 0, 0, theWidth, theHeight);
-    characterTalk = "Who knows what lies behind this door--";
-    let bleh = millis() - millis();
-    if (bleh === 2000) {
-      state = 14;
-    }
+    characterTalk = "Who knows what lies behind this door...";
   }
   else if (state === 14) {
     image(gnomeIntroduce, 0, 0, theWidth, theHeight);
