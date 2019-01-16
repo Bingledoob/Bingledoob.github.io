@@ -66,12 +66,19 @@ let showVehicle;
 let streetSide;
 
 let minigameDuration = 45000;
+
 //spawning the car variables
 let carSpawnRate = 5000;
 let lastChange;
 
 let startScreen;
 let backgroundStart;
+let outsideHouse;
+let handKnob;
+let gnomeIntroduce;
+let goblinIntroduce;
+
+let gnomeGrunt;
 
 
 class TextboxNormal {
@@ -203,9 +210,9 @@ class Vehicle {
   }
 }
 
-class Car {
+class CarEnemy {
   constructor() {
-    this.x = 1000;
+    this.x = 1400;
     this.y = 0;
     this.speedX = 1;
   }
@@ -234,9 +241,14 @@ function preload() {
   stateChange = millis();
 
   //backgrounds, textboxes, etc.
+  gnomeGrunt = loadSound("asset/gnomegrunt.mp3");
   textBoxNormal = loadImage("assets/textboxNormal.png");
   startScreen = loadImage("assets/startScreen.png");
   backgroundStart = loadImage("assets/backgroundStart.png");
+  outsideHouse = loadImage("assets/Outside House.png");
+  handKnob = loadImage("assets/Hand Knob.png");
+  gnomeIntroduce = loadImage("assets/Goblin Opening (Gnome).png");
+  goblinIntroduce = loadImage("assets/Goblin Opening.png");
 
   //jay's emotions
   jayNeutral = loadImage("assets/Jay Neutral.png");
@@ -294,17 +306,23 @@ function draw() {
 
   normalTextbox.display();
   if (state === 9) {
-    spawnVehicle();
+
+    let elapsedTime = millis() - lastChange;
+
+    if (elapsedTime >= carSpawnRate) {
+      spawnVehicle();
+      lastChange = millis();
+    }
   }
 }
 
 function spawnVehicle() {
+  enemyCar = new CarEnemy;
   streetSide = floor(random(0,1));
-  enemyCar = new Car;
   if (streetSide === 0) {
     enemyCar.y = 150;
   }
-  if (streetSide === 1) {
+  else if (streetSide === 1) {
     enemyCar.y = 400;
   }
   enemyCar.display();
@@ -343,6 +361,7 @@ function mousePressed() {
   else if (state === 10) {
     state = 10;
   }
+
 
 
 }
@@ -406,11 +425,7 @@ function checkPeriod(){
     noText = true;
     showVehicle = true;
 
-    let elapsedTime = millis() - lastChange;
 
-    if (elapsedTime >= carSpawnRate) {
-      lastChange = millis();
-    }
     // movement
     if (keyIsPressed && key === "w") {
       scooter.y -= 20;
@@ -432,7 +447,7 @@ function checkPeriod(){
 
   }
   else if (state === 10) {
-    image(backgroundStart, 0, 0, theWidth, theHeight);
+    image(outsideHouse, 0, 0, theWidth, theHeight);
     showJay = true;
     noText = false;
     showVehicle = false;
