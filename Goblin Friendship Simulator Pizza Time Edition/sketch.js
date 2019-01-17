@@ -4,7 +4,6 @@
 
 let theWidth, theHeight;
 let state;
-let stateChange;
 
 let textBoxNormal;
 let normalTextbox;
@@ -67,10 +66,7 @@ let showVehicle;
 let streetSide;
 
 let minigameDuration = 10000;
-let wasdDuration = 1500;
-
-//spawning the car variables
-let lastChange;
+let wasdDuration = 1000;
 
 let startScreen;
 let backgroundStart;
@@ -246,7 +242,6 @@ function preload() {
   theWidth = windowWidth;
   theHeight = 7.8 / 16 * theWidth;
   state = 0;
-  stateChange = millis();
 
   //backgrounds, textboxes, etc.
   gnomeGrunt = loadSound("assets/gnomegrunt.mp3");
@@ -429,11 +424,7 @@ function checkPeriod(){
     else if (keyIsPressed && key === "a") {
       scooter.x -= 20;
     }
-
-    let elapsedTime = millis() - stateChange;
-    if (elapsedTime >= wasdDuration) {
-      image(wasd);
-    }
+    let elapsedTime = millis() - millis();
     if (elapsedTime >= minigameDuration) {
       state = 10;
     }
