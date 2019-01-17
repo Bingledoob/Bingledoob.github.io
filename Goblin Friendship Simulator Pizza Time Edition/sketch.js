@@ -67,6 +67,7 @@ let showVehicle;
 let streetSide;
 
 let minigameDuration = 10000;
+let wasdDuration = 1500;
 
 //spawning the car variables
 let lastChange;
@@ -430,6 +431,9 @@ function checkPeriod(){
     }
 
     let elapsedTime = millis() - stateChange;
+    if (elapsedTime >= wasdDuration) {
+      image(wasd);
+    }
     if (elapsedTime >= minigameDuration) {
       state = 10;
     }
