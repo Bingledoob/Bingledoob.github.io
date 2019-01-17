@@ -61,14 +61,14 @@ let street;
 let vehicle;
 let enemyCar;
 let carImage;
+let wasd;
 
 let showVehicle;
 let streetSide;
 
-let minigameDuration = 45000;
+let minigameDuration = 10000;
 
 //spawning the car variables
-let carSpawnRate = 5000;
 let lastChange;
 
 let startScreen;
@@ -256,6 +256,7 @@ function preload() {
   handKnob = loadImage("assets/Hand Knob.png");
   gnomeIntroduce = loadImage("assets/Goblin Opening (Gnome).png");
   goblinIntroduce = loadImage("assets/Goblin Opening.png");
+  wasd = loadImage("assets/wasd.png");
 
   //jay's emotions
   jayNeutral = loadImage("assets/Jay Neutral.png");
